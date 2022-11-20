@@ -6,3 +6,6 @@
 
 # UML Диаграмма парсера и его моделей
 ![ParserIml](https://user-images.githubusercontent.com/57283186/198904397-8bc7e5f1-08cc-47cf-8039-87b0210c9e33.png)
+
+# UML Диаграмма Vk Api Helper и модели
+![VkApiHelper](https://user-images.githubusercontent.com/57283186/200187000-fd9d921a-6366-4674-b0c6-639c33bbb535.png)
