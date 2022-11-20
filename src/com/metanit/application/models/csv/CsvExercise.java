@@ -1,4 +1,4 @@
-package com.metanit.domain.models;
+package com.metanit.application.models.csv;
 
 public class CsvExercise {
     public String name;

@@ -1,6 +1,5 @@
-package com.metanit.domain.models;
+package com.metanit.application.models.csv;
 
-import java.util.Dictionary;
 import java.util.HashMap;
 
 public class CsvStudent {

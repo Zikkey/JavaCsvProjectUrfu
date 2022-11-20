@@ -1,6 +1,7 @@
-package com.metanit.domain.helpers;
+package com.metanit.infrastucture.services;
 
-import com.metanit.domain.models.VkUserInfo;
+import com.metanit.application.interfaces.IVkApiHelper;
+import com.metanit.application.models.vk.VkUserInfo;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -11,7 +12,7 @@ import com.vk.api.sdk.objects.users.Fields;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class VkApiHelper {
+public class VkApiHelper implements IVkApiHelper {
     private static final VkApiClient CLIENT = new VkApiClient(new HttpTransportClient());
     private static final Integer APP_ID = 102609066;
     private static final String TOKEN = "SECRET";
@@ -20,7 +21,8 @@ public class VkApiHelper {
         return new UserActor(APP_ID, TOKEN);
     }
 
-    public static VkUserInfo findUserInfo(String search) throws ClientException, ApiException, ParseException {
+    @Override
+    public VkUserInfo findUserInfo(String search) throws ClientException, ApiException, ParseException {
         var actor = getUserActor();
         var result = CLIENT.users().search(actor)
                 .count(1)

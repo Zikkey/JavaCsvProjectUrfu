@@ -1,4 +1,4 @@
-package com.metanit.domain.models;
+package com.metanit.application.models.vk;
 
 import com.vk.api.sdk.objects.base.Sex;
 

@@ -1,20 +1,23 @@
-package com.metanit.domain.helpers;
+package com.metanit.infrastucture.services;
 
 import au.com.bytecode.opencsv.CSVReader;
-import com.metanit.domain.extensions.StringExtensions;
-import com.metanit.domain.models.CsvCourse;
-import com.metanit.domain.models.CsvExercise;
-import com.metanit.domain.models.CsvModule;
-import com.metanit.domain.models.CsvStudent;
+import com.metanit.application.interfaces.ICsvParseHelper;
+import com.metanit.application.extensions.StringExtensions;
+import com.metanit.application.models.csv.CsvCourse;
+import com.metanit.application.models.csv.CsvExercise;
+import com.metanit.application.models.csv.CsvModule;
+import com.metanit.application.models.csv.CsvStudent;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
 
-public class CsvParseHelper {
+public class CsvParseHelper implements ICsvParseHelper {
     private static final int START_POS = 6;
-    public static void parseCsvToModel(CsvCourse course, String csvPath) throws IOException {
+
+    @Override
+    public void parseCsvToModel(CsvCourse course, String csvPath) throws IOException {
         CSVReader reader = new CSVReader(new FileReader(csvPath), ';', '"');
         var modules = reader.readNext();
         var exercises = reader.readNext();

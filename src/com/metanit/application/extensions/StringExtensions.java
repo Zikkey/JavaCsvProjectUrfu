@@ -1,4 +1,4 @@
-package com.metanit.domain.extensions;
+package com.metanit.application.extensions;
 
 public class StringExtensions {
     public static int tryParseInt(String value) {

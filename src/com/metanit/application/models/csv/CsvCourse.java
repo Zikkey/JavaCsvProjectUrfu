@@ -1,4 +1,4 @@
-package com.metanit.domain.models;
+package com.metanit.application.models.csv;
 
 import java.util.ArrayList;
 
