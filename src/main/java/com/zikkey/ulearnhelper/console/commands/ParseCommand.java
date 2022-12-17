@@ -66,6 +66,7 @@ public class ParseCommand implements ICommand {
             parser.parseCsvToModel(course, args.get(1));
         } catch(IOException e) {
             log.error("Не удалось считать файл");
+            return;
         }
 
         print("Парсинг CSV закончен, происходит сохранение в базу данных...");
