@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @MappedSuperclass
-public class BaseEntity {
+public class BaseEntity extends Object{
     @Id
     @Type(type = "pg-uuid")
     @GenericGenerator(name = "uuid-gen", strategy = "uuid2")

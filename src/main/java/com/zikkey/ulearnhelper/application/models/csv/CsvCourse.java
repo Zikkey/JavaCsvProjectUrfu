@@ -7,9 +7,9 @@ public class CsvCourse {
     public ArrayList<CsvModule> modules;
     public ArrayList<CsvStudent> students;
 
-    public CsvCourse(String name, ArrayList<CsvModule> modules, ArrayList<CsvStudent> students) {
+    public CsvCourse(String name) {
         this.name = name;
-        this.modules = modules;
-        this.students = students;
+        this.modules = new ArrayList<>();
+        this.students = new ArrayList<>();
     }
 }

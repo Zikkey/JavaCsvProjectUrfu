@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <CustomLevels>
+        <CustomLevel name="APP" intLevel="399" />
+    </CustomLevels>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%highlight{ULEARN-HELPER >}{ERROR=Bright RED, WARN=Bright Yellow, INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White, APP=Green} %msg%n%throwable" disableAnsi="false"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="TRACE">
+            <AppenderRef ref="Console" level="APP"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

@@ -1,18 +1,23 @@
 package com.zikkey.ulearnhelper.domain.entities;
 
 import com.zikkey.ulearnhelper.domain.enums.ExerciseType;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "exercise")
 public class Exercise extends BaseEntity {
-    public String name;
+    private String name;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "module_id")
-    public Module module;
+    private Module module;
     @Column(name = "exercise_type")
     private String exerciseTypeStr;
 

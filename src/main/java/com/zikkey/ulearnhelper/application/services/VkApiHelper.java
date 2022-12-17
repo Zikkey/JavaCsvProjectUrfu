@@ -1,4 +1,4 @@
-package com.zikkey.ulearnhelper.application.interfaces.services;
+package com.zikkey.ulearnhelper.application.services;
 
 import com.zikkey.ulearnhelper.application.interfaces.IVkApiHelper;
 import com.zikkey.ulearnhelper.application.models.vk.VkUserInfo;
@@ -8,16 +8,18 @@ import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import com.vk.api.sdk.objects.users.Fields;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+@Service
 public class VkApiHelper implements IVkApiHelper {
-    private static final VkApiClient CLIENT = new VkApiClient(new HttpTransportClient());
-    private static final Integer APP_ID = 102609066;
-    private static final String TOKEN = "SECRET";
+    private final VkApiClient CLIENT = new VkApiClient(new HttpTransportClient());
+    private final Integer APP_ID = 102609066;
+    private final String TOKEN = "SECRET";
 
-    private static UserActor getUserActor() {
+    private UserActor getUserActor() {
         return new UserActor(APP_ID, TOKEN);
     }
 
