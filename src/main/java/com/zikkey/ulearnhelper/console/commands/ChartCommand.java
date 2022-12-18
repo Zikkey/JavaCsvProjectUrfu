@@ -1,7 +1,7 @@
 package com.zikkey.ulearnhelper.console.commands;
 
 import com.zikkey.ulearnhelper.application.interfaces.command.ICommand;
-import com.zikkey.ulearnhelper.application.utils.CommandRegistry;
+import com.zikkey.ulearnhelper.application.services.VkEnrichmentService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.stereotype.Component;
@@ -10,36 +10,27 @@ import java.util.List;
 
 @Component
 @Log4j2
-public class HelpCommand implements ICommand {
-    private final CommandRegistry registry;
+public class ChartCommand implements ICommand {
     private final Level APP = Level.getLevel("APP");
-
-    public HelpCommand(CommandRegistry registry) {
-        this.registry = registry;
-    }
 
     @Override
     public String getName() {
-        return "help";
+        return "chart";
     }
 
     @Override
     public String getDescription() {
-        return "выводит список команд";
+        return "сохраняет диаграмму по названию курса";
     }
 
     @Override
     public String getUsage() {
-        return null;
+        return "course path";
     }
 
     @Override
     public void run(List<String> args) {
-       for(var command : registry.registeredCommands) {
-           var usage = command.getUsage();
-           var usageString = usage != null ? " " + usage : "";
-           print(command.getName() + usageString + " - " + command.getDescription());
-       }
+
     }
 
     private void print(String msg) {

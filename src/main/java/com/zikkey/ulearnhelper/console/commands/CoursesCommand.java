@@ -1,7 +1,8 @@
 package com.zikkey.ulearnhelper.console.commands;
 
 import com.zikkey.ulearnhelper.application.interfaces.command.ICommand;
-import com.zikkey.ulearnhelper.application.utils.CommandRegistry;
+import com.zikkey.ulearnhelper.application.repository.CourseRepository;
+import com.zikkey.ulearnhelper.domain.entities.Course;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.stereotype.Component;
@@ -10,22 +11,22 @@ import java.util.List;
 
 @Component
 @Log4j2
-public class HelpCommand implements ICommand {
-    private final CommandRegistry registry;
+public class CoursesCommand implements ICommand {
+    private final CourseRepository courseRepository;
     private final Level APP = Level.getLevel("APP");
 
-    public HelpCommand(CommandRegistry registry) {
-        this.registry = registry;
+    public CoursesCommand(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
     }
 
     @Override
     public String getName() {
-        return "help";
+        return "courses";
     }
 
     @Override
     public String getDescription() {
-        return "выводит список команд";
+        return "получает список внесенных курсов";
     }
 
     @Override
@@ -35,11 +36,11 @@ public class HelpCommand implements ICommand {
 
     @Override
     public void run(List<String> args) {
-       for(var command : registry.registeredCommands) {
-           var usage = command.getUsage();
-           var usageString = usage != null ? " " + usage : "";
-           print(command.getName() + usageString + " - " + command.getDescription());
-       }
+        var courses = String.join(", ", courseRepository.findAll()
+                .stream()
+                .map(Course::getName)
+                .toList());
+        print("Курсы: " + courses);
     }
 
     private void print(String msg) {

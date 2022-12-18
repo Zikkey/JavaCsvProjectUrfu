@@ -1,6 +1,7 @@
 package com.zikkey.ulearnhelper.application.interfaces.command;
 
 import com.sun.istack.NotNull;
+import com.vk.api.sdk.exceptions.ClientException;
 import com.zikkey.ulearnhelper.application.utils.CommandRegistry;
 
 import java.lang.reflect.InvocationTargetException;
@@ -17,6 +18,6 @@ public interface ICommand {
 
     String getUsage();
 
-    void run(@NotNull List<String> args);
+    void run(@NotNull List<String> args) throws ClientException;
 
 }

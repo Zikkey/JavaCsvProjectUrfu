@@ -5,6 +5,7 @@ import com.zikkey.ulearnhelper.application.interfaces.command.ICommand;
 import com.zikkey.ulearnhelper.application.models.csv.CsvCourse;
 import com.zikkey.ulearnhelper.application.repository.*;
 import com.zikkey.ulearnhelper.application.services.CourseCsvToDomainMapper;
+import com.zikkey.ulearnhelper.application.services.VkEnrichmentService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
 import org.springframework.stereotype.Component;
@@ -16,22 +17,19 @@ import java.util.List;
 @Log4j2
 public class ParseCommand implements ICommand {
     private final Level APP = Level.getLevel("APP");
+    private final VkEnrichmentService enrich;
     private final ICsvParseHelper parser;
     private final CourseCsvToDomainMapper mapper;
     private final CourseRepository courseRepository;
-    private final ModuleRepository moduleRepository;
-    private final ExerciseRepository exerciseRepository;
     private final StudentRepository studentRepository;
-    private final StudentScoreRepository studentScoreRepository;
 
-    public ParseCommand(ICsvParseHelper parser, CourseCsvToDomainMapper mapper, CourseRepository courseRepository, ModuleRepository moduleRepository, ExerciseRepository exerciseRepository, StudentRepository studentRepository, StudentScoreRepository studentScoreRepository) {
+    public ParseCommand(VkEnrichmentService enrich, ICsvParseHelper parser, CourseCsvToDomainMapper mapper,
+                        CourseRepository courseRepository, StudentRepository studentRepository) {
+        this.enrich = enrich;
         this.parser = parser;
         this.mapper = mapper;
         this.courseRepository = courseRepository;
-        this.moduleRepository = moduleRepository;
-        this.exerciseRepository = exerciseRepository;
         this.studentRepository = studentRepository;
-        this.studentScoreRepository = studentScoreRepository;
     }
 
     @Override
@@ -60,7 +58,7 @@ public class ParseCommand implements ICommand {
             return;
         }
 
-        print("Происходит считывание CSV...");
+        print("[1/3] Происходит считывание CSV...");
         var course = new CsvCourse(args.get(0).replace("\"", ""));
         try {
             parser.parseCsvToModel(course, args.get(1));
@@ -69,13 +67,21 @@ public class ParseCommand implements ICommand {
             return;
         }
 
-        print("Парсинг CSV закончен, происходит сохранение в базу данных...");
+        print("[2/3] Парсинг CSV закончен, получение дополнительных данных из VK...");
         var domain = mapper.toDomain(course);
+        try {
+            enrich.enrich(domain.students);
+        } catch(Exception e) {
+            log.error("Ошибка получения данных из VK.");
+            return;
+        }
+        print("[3/3] Данные получены, происходит сохранение в базу данных...");
         courseRepository.save(domain.course);
         studentRepository.saveAll(domain.students);
         print("Курс из CSV " + args.get(1) + " успешно сохранен в базу данных под названием " + args.get(0));
         print("Количество модулей: " + domain.course.getModules().size());
         print("Количество студентов: " + domain.students.size());
+
     }
 
     private void print(String msg) {

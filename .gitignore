@@ -19,7 +19,9 @@ target/
 *.iml
 *.ipr
 *.png
-
+*.log
+*.gz
+/out
 
 ### NetBeans ###
 /nbproject/private/
