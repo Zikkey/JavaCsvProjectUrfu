@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class VkEnrichmentService implements IVkEnrichmentService {
     private final VkApiClient CLIENT = new VkApiClient(new HttpTransportClient());
     private final Integer APP_ID = 102609066;
-    private final String TOKEN = "vk1.a.zu23XBGsgbm5nbrTqMue03YEeYhiVt4FTvy6qIbI4Tf01VIotrL7-bUIzl51o0IFDq9c1jDDVA6vXyYqGS3Qyvj96hefOesvPD-G_kQJVQKc2h5lASg3uC3POwnGkOuVu_45ip-bfUMA41uMWlOV07vdvCvLtL2CY2JXZnpOHMGWNSMgPXoYixpLRVhVYh5bua0gUqfB2vDRHDjQxPY_5Q";
+    private final String TOKEN = "";
 
     private UserActor getUserActor() {
         return new UserActor(APP_ID, TOKEN);

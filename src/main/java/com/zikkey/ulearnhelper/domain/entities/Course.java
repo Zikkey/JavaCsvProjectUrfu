@@ -1,13 +1,10 @@
 package com.zikkey.ulearnhelper.domain.entities;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @Setter
@@ -17,7 +14,7 @@ import java.util.UUID;
 })
 public class Course extends BaseEntity {
     private String name;
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Module> modules = new HashSet<>();
 
     public void addModule(Module module) {
@@ -29,4 +26,5 @@ public class Course extends BaseEntity {
         modules.remove(module);
         module.setCourse(null);
     }
+
 }

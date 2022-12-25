@@ -1,6 +1,5 @@
 package com.zikkey.ulearnhelper.domain.entities;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,14 +7,13 @@ import javax.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "student")
 public class Student extends BaseEntity {
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<StudentScore> studentScores = new HashSet<>();
     @Column(name = "group_name")
     private String group;

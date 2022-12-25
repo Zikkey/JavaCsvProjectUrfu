@@ -1,15 +1,12 @@
 package com.zikkey.ulearnhelper.application.utils;
 
 import com.zikkey.ulearnhelper.UlearnHelperApplication;
-import com.zikkey.ulearnhelper.application.annotation.Command;
 import com.zikkey.ulearnhelper.application.interfaces.command.ICommand;
 import org.reflections.Reflections;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;

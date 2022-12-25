@@ -50,11 +50,11 @@ public class ParseCommand implements ICommand {
     @Override
     public void run(List<String> args) {
         if (args.size() != 2) {
-            log.error("Нужно два аргумента - название курса, название CSV(file.csv)");
+            log.warn("Нужно два аргумента - название курса, название CSV(file.csv)");
             return;
         }
         if (!args.get(1).endsWith(".csv")) {
-            log.error("Файл должен быть в формате .csv");
+            log.warn("Файл должен быть в формате .csv");
             return;
         }
 

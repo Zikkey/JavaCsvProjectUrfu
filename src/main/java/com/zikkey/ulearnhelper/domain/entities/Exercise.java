@@ -1,13 +1,11 @@
 package com.zikkey.ulearnhelper.domain.entities;
 
 import com.zikkey.ulearnhelper.domain.enums.ExerciseType;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,7 +13,9 @@ import java.util.UUID;
 @Table(name = "exercise")
 public class Exercise extends BaseEntity {
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "threshold_score")
+    private int thresholdScore;
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "module_id")
     private Module module;
     @Column(name = "exercise_type")

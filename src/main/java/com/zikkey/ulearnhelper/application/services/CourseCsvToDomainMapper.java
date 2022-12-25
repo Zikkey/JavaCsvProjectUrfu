@@ -38,6 +38,7 @@ public class CourseCsvToDomainMapper {
     private Set<Exercise> mapExercises(ArrayList<CsvExercise> csvExercises) {
         return csvExercises.stream().map(csvExer -> {
             var exercise = new Exercise();
+            exercise.setThresholdScore(csvExer.thresholdScore);
             exercise.setName(csvExer.name);
             exercise.SetType(mapExerciseType(csvExer.name));
             return exercise;
